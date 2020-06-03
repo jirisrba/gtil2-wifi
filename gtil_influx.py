@@ -48,7 +48,7 @@ def send_data_to_influx(gtil_data):
       "points": [{
           "measurement": measurement,
           "fields": {
-              "active_power": int(gtil_data['now_p']),
+              "current_power": int(gtil_data['now_p']),
               "today_energy": float(gtil_data['today_e']),
               "total_energy": float(gtil_data['total_e'])
           }
