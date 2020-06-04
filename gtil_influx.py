@@ -21,11 +21,11 @@ gtil_ip = '192.168.2.205'
 db = InfluxDBClient('192.168.2.4', 8089, use_udp=True, udp_port=8089, database='malina')
 measurement = 'gtil2'
 
+gtil_data = dict()
+
 
 def read_gtil_data():
   """ read data from GTIL2 Wifi module """
-
-  gtil_data = dict()
 
   response = requests.get(
       'http://' + gtil_ip + '/status.html',
@@ -39,7 +39,7 @@ def read_gtil_data():
   # print(gtil_data)
   return gtil_data
 
-def send_data_to_influx(gtil_data):
+def send_data_to_influx():
   """ send data to influxdb """
   json_body = {
       "tags": {
@@ -61,8 +61,8 @@ def send_data_to_influx(gtil_data):
 def main():
   """Main()"""
 
-  gtil_data = read_gtil_data
-  send_data_to_influx(gtil_data)
+  read_gtil_data()
+  send_data_to_influx()
 
 
 if __name__ == "__main__":
